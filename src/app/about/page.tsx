@@ -18,8 +18,11 @@ export default function About() {
           <p>I use AI to write and debug code. I decide the flows and the structure of the system.</p>
         </div>
       </Section>
-      <Section n="02" title="Education">
-        <p className="prose-site">Cambridge English CAE, level C2.</p>
+      <Section n="02" title="Education and certifications">
+        <ul className="prose-site grid gap-1">
+          <li>Cambridge English CAE, level C2.</li>
+          <li>Make.com Advanced certification.</li>
+        </ul>
       </Section>
     </>
   );

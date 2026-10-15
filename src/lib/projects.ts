@@ -172,7 +172,7 @@ export const projects: Project[] = [
     name: "AirLife",
     year: "2025",
     oneLiner: "Online shop for air conditioners, air purifiers and dehumidifiers.",
-    role: "Built for an acquaintance's business. 7 of 16 commits are mine, 9 come from the Lovable tool.",
+    role: "7 of 16 commits are mine, 9 come from the Lovable tool.",
     team: "Team of 1.",
     stack: ["Vite", "React", "TypeScript", "Tailwind", "shadcn/ui", "Supabase", "React Query"],
     problem:
@@ -180,7 +180,7 @@ export const projects: Project[] = [
     decision:
       "The cart syncs between the browser and the database, so guests keep their cart and it merges at login. Order numbers and stock changes run as database functions. Stock is checked before each order is created.",
     result:
-      "A shop with cart, checkout, order history for customers, payment by cash on delivery or bank transfer, and an admin panel for order status, tracking number, courier and notes.",
+      "A shop with cart, checkout, order history for customers, payment by cash on delivery or bank transfer, and an admin panel for order status, tracking number, courier and notes. The site is live at airlife.ro and currently shows a coming soon page.",
     inCode: [
       { text: "Guest carts live in local storage and merge into the database cart at login.", path: "src/contexts/CartContext.tsx" },
       { text: "Order numbers and stock decrease run as database functions called through RPC.", path: "src/pages/Checkout.tsx" },
@@ -189,6 +189,7 @@ export const projects: Project[] = [
     ],
     scale: ["16 commits", "3 migrations"],
     repo: priv,
+    live: "https://airlife.ro",
   },
 ];
 
