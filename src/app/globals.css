@@ -191,11 +191,57 @@ a {
 .spine-dot {
   position: absolute;
   left: -3px;
-  top: calc(var(--p, 0) * (100% - 7px));
   width: 7px;
   height: 7px;
   border-radius: 50%;
   background: var(--color-accent);
+  transition: top 500ms var(--ease-site);
+}
+.spine-tick {
+  position: absolute;
+  left: -2px;
+  width: 5px;
+  height: 1px;
+  background: var(--color-muted);
+}
+.spine-label {
+  position: fixed;
+  right: 24px;
+  bottom: 16px;
+  z-index: 10;
+  display: none;
+  background: var(--color-bg);
+  padding: 4px 8px;
+  border: 1px solid var(--color-line);
+}
+@media (min-width: 768px) {
+  .spine-label {
+    display: block;
+  }
+}
+
+/* Cursor preview for the projects table. Desktop with a fine pointer only. */
+.cursor-preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  display: none;
+  width: 288px;
+  padding: 16px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-line);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms var(--ease-site);
+}
+.cursor-preview[data-on="true"] {
+  opacity: 1;
+}
+@media (hover: hover) and (pointer: fine) {
+  .cursor-preview {
+    display: block;
+  }
 }
 
 /* Projects table: hover inverts to accent with black text */

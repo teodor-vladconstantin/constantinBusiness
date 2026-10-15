@@ -8,25 +8,30 @@ export default function Contact() {
   return (
     <>
       <PageTitle label="Contact" title="Contact" />
-      <Section n="01" title="Links">
+      <Section n="01" title="Write to me">
+        <p className="prose-site mb-3">Send a short description of the problem and the budget range.</p>
         <ul className="grid gap-2">
-          {site.email && (
-            <li>
-              <a href={`mailto:${site.email}`}>{site.email}</a>
+          {site.emails.map((e, i) => (
+            <li key={e}>
+              <a className={`underline underline-offset-4 ${i === 0 ? "!text-accent" : ""}`} href={`mailto:${e}`}>
+                {e}
+              </a>
             </li>
-          )}
+          ))}
+        </ul>
+      </Section>
+      <Section n="02" title="Elsewhere">
+        <ul className="grid gap-2">
           <li>
-            <a href={site.linkedin} rel="noopener noreferrer">
+            <a className="underline underline-offset-4" href={site.linkedin} rel="noopener noreferrer">
               LinkedIn
             </a>
           </li>
-          {site.github && (
-            <li>
-              <a href={site.github} rel="noopener noreferrer">
-                GitHub
-              </a>
-            </li>
-          )}
+          <li>
+            <a className="underline underline-offset-4" href={site.github} rel="noopener noreferrer">
+              GitHub
+            </a>
+          </li>
         </ul>
       </Section>
     </>

@@ -2,9 +2,10 @@ export const site = {
   name: "Duku Constantin",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   linkedin: "https://www.linkedin.com/in/dukuconstantin",
-  // Empty until the owner confirms the value. Components render a link only when set.
-  github: "",
-  email: "",
+  github: "https://github.com/teodor-vladconstantin",
+  emails: ["duku.constantin@gmail.com", "duku@joben.eu"],
+  intro:
+    "I understand a client's problem and turn the business need into a solution that fits their budget, without enterprise rigidity.",
 };
 
 export const nav = [
