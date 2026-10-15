@@ -49,7 +49,7 @@ export const projects: Project[] = [
       { text: "School contact data stays out of activity logs.", path: "supabase/migrations/20261004000500_pn.sql" },
     ],
     scale: ["38 commits", "16 migrations", "7 test files", "6 roles, 3 departments"],
-    repo: priv,
+    repo: { kind: "public", label: "Repository", url: "https://github.com/teodor-vladconstantin/ThinkUp-Intra" },
   },
   {
     slug: "nyra",
@@ -143,7 +143,7 @@ export const projects: Project[] = [
       { text: "Recruitment moved from one applications table to program-based tables.", path: "supabase/migrations/20260829140000_recruitment_full.sql" },
     ],
     scale: ["49 commits", "9 migrations"],
-    repo: priv,
+    repo: { kind: "public", label: "Repository", url: "https://github.com/teodor-vladconstantin/thinkup-gateway" },
   },
   {
     slug: "divein",
