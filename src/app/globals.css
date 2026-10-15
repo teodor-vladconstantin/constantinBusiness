@@ -1,0 +1,226 @@
+@import "tailwindcss";
+
+/* Design tokens. Spacing unit is 8px, so p-1 = 8px, p-3 = 24px. */
+@theme {
+  --spacing: 8px;
+
+  --color-bg: #111113;
+  --color-fg: #f4f4f5;
+  --color-muted: #a1a1aa;
+  --color-line: #2a2a2e;
+  --color-accent: #eab308;
+
+  --font-heading: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+
+  --radius-xs: 0px;
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
+
+  --ease-site: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  --gutter: 24px;
+  --container: 1200px;
+  --dur: 700ms;
+}
+
+html {
+  background: var(--color-bg);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.5;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+/* Grid: 12 columns, 1200px container, 24px gutters */
+.container-site {
+  width: 100%;
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+
+/* Type roles */
+.display {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.prose-site {
+  max-width: 62ch;
+}
+
+/* Motion primitives. One easing everywhere. */
+.reveal-mask {
+  display: block;
+  overflow: hidden;
+}
+.reveal-mask > span {
+  display: block;
+  transform: translateY(105%);
+  transition: transform var(--dur) var(--ease-site);
+}
+[data-inview="true"] > .reveal-mask > span,
+[data-inview="true"].reveal-mask > span {
+  transform: translateY(0);
+}
+
+.rule {
+  height: 1px;
+  background: var(--color-line);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur) var(--ease-site);
+}
+[data-inview="true"] > .rule,
+[data-inview="true"].rule {
+  transform: scaleX(1);
+}
+
+.wipe {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--dur) var(--ease-site);
+}
+[data-inview="true"] > .wipe,
+[data-inview="true"].wipe {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Page transition, under 400ms */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.page-enter {
+  animation: page-in 300ms var(--ease-site) both;
+}
+
+/* Spine: scroll progress line with an accent dot */
+.spine {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 12px;
+  width: 1px;
+  z-index: 10;
+  pointer-events: none;
+  display: none;
+}
+@media (min-width: 768px) {
+  .spine {
+    display: block;
+  }
+}
+.spine-track,
+.spine-fill {
+  position: absolute;
+  inset: 0;
+}
+.spine-track {
+  background: var(--color-line);
+}
+.spine-fill {
+  background: var(--color-fg);
+  transform: scaleY(var(--p, 0));
+  transform-origin: top;
+}
+.spine-dot {
+  position: absolute;
+  left: -3px;
+  top: calc(var(--p, 0) * (100% - 7px));
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+/* Projects table: hover inverts to accent with black text */
+.row-invert {
+  transition: background-color 200ms var(--ease-site), color 200ms var(--ease-site);
+}
+.row-invert:hover,
+.row-invert:focus-visible {
+  background: var(--color-accent);
+  color: #000;
+}
+.row-invert:hover .label,
+.row-invert:focus-visible .label {
+  color: #000;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-mask > span,
+  .rule,
+  .wipe {
+    transform: none;
+    clip-path: none;
+    transition: none;
+  }
+  .page-enter {
+    animation: none;
+  }
+}
