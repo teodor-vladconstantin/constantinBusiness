@@ -9,7 +9,7 @@ export function SiteHeader() {
   return (
     <header className="border-b border-line">
       <div className="container-site flex items-center justify-between gap-3 py-2">
-        <Link href="/" className="font-heading text-[17px] font-bold tracking-[-0.03em]">
+        <Link href="/" className="whitespace-nowrap font-heading text-[17px] font-bold tracking-[-0.03em]">
           {site.name}
         </Link>
         <nav aria-label="Main">

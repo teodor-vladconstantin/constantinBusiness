@@ -25,7 +25,7 @@ export function PageTitle({ label, title }: { label: string; title: string }) {
     <header className="container-site pb-8 pt-12 md:pt-16">
       <p className="label mb-2">{label}</p>
       <h1 className="display">
-        <Reveal>{title}</Reveal>
+        <Reveal eager>{title}</Reveal>
       </h1>
     </header>
   );

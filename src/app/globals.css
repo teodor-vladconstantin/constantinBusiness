@@ -112,6 +112,9 @@ a {
 .reveal-mask {
   display: block;
   overflow: hidden;
+  /* room for descenders at line-height 1, without moving the layout */
+  padding-bottom: 0.15em;
+  margin-bottom: -0.15em;
 }
 .reveal-mask > span {
   display: block;
@@ -121,6 +124,19 @@ a {
 [data-inview="true"] > .reveal-mask > span,
 [data-inview="true"].reveal-mask > span {
   transform: translateY(0);
+}
+
+@keyframes reveal-up {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.reveal-eager {
+  display: block;
+  animation: reveal-up var(--dur) var(--ease-site) both;
 }
 
 .rule {
@@ -145,13 +161,12 @@ a {
 }
 
 /* Page transition, under 400ms */
+/* Transform only. An opacity start would delay the first paint of the content. */
 @keyframes page-in {
   from {
-    opacity: 0;
     transform: translateY(8px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
   }
 }
@@ -266,7 +281,8 @@ a {
     clip-path: none;
     transition: none;
   }
-  .page-enter {
+  .page-enter,
+  .reveal-eager {
     animation: none;
   }
 }

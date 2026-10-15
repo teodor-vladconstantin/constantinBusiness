@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SmoothScroll } from "@/components/smooth-scroll";
-import { CommandPalette } from "@/components/command-palette";
+import { PaletteLazy } from "@/components/palette-lazy";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { site } from "@/lib/site";
@@ -10,13 +10,16 @@ import "./globals.css";
 
 // next/font reads these options at build time, so they must be literals.
 const poppins = Poppins({ subsets: ["latin", "latin-ext"], weight: "700", variable: "--font-poppins", display: "swap" });
-const inter = Inter({ subsets: ["latin", "latin-ext"], weight: ["400", "700"], variable: "--font-inter", display: "swap" });
-const mono = JetBrains_Mono({ subsets: ["latin", "latin-ext"], weight: "400", variable: "--font-jetbrains", display: "swap" });
+const inter = Inter({ subsets: ["latin", "latin-ext"], weight: ["400", "700"], variable: "--font-inter", display: "swap", preload: false });
+const mono = JetBrains_Mono({ subsets: ["latin", "latin-ext"], weight: "400", variable: "--font-jetbrains", display: "swap", preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: site.name, template: `%s | ${site.name}` },
   description: "Developer from Romania. I turn a client's business need into a solution that fits the budget.",
+  openGraph: { siteName: site.name, type: "website" },
+  twitter: { card: "summary_large_image" },
+  alternates: { types: { "application/rss+xml": "/blog/rss.xml" } },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -27,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <SmoothScroll />
-        <CommandPalette />
+        <PaletteLazy />
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />

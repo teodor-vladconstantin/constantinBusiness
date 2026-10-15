@@ -19,7 +19,7 @@ export default function Home() {
       <section className="container-site pb-16 pt-12 md:pt-24">
         <p className="label mb-2">{site.name}</p>
         <h1 className="display max-w-[20ch]">
-          <Reveal>{site.intro}</Reveal>
+          <Reveal eager>{site.intro}</Reveal>
         </h1>
       </section>
 

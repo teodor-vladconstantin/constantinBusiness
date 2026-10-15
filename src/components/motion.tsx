@@ -32,7 +32,15 @@ export function InView({ children, className = "", threshold = 0.2 }: { children
 }
 
 // Title reveal: text slides up inside an overflow mask.
-export function Reveal({ children }: { children: ReactNode }) {
+// `eager` is for titles above the fold: pure CSS, so it runs before hydration.
+export function Reveal({ children, eager = false }: { children: ReactNode; eager?: boolean }) {
+  if (eager) {
+    return (
+      <span className="reveal-mask">
+        <span className="reveal-eager">{children}</span>
+      </span>
+    );
+  }
   return (
     <InView>
       <span className="reveal-mask">
