@@ -1,6 +1,7 @@
 export const site = {
   name: "Duku Constantin",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  role: "Freelance forward deployed engineer",
   linkedin: "https://www.linkedin.com/in/dukuconstantin",
   github: "https://github.com/teodor-vladconstantin",
   emails: ["duku.constantin@gmail.com", "duku@joben.eu"],
