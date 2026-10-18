@@ -10,3 +10,5 @@ site-facts/
 decisions.md
 security-scan.md
 TODO.md
+
+!.env.example
