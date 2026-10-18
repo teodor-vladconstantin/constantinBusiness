@@ -6,6 +6,16 @@ export type RepoLink =
   | { kind: "team"; url: string; label: string }
   | { kind: "private"; label: "Private repository" };
 
+export type StudySections = {
+  summary?: string[];
+  problem: string[];
+  missing: string[];
+  investigation: string[];
+  decision: string[];
+  technical?: string[];
+  result: string[];
+};
+
 export type Project = {
   slug: string;
   name: string;
@@ -21,15 +31,19 @@ export type Project = {
   inCode: { text: string; path: string }[];
   scale: string[];
   repo?: RepoLink; // omitted when no repository is shown
-  preview?: string; // file in public/previews
-  internal?: boolean; // internal tool, no public product page
-  case?: boolean; // has a full case study at /work/<slug>
   live?: string;
+  preview?: string; // full image URL
+  resultImages?: string[]; // full image URLs
+  internal?: boolean; // internal tool, no public product page
+  study?: StudySections; // set when the project has a full case study
 };
+
+// Shape of the data array below. It is removed once projects live in the database.
+type LegacyProject = Omit<Project, "preview" | "resultImages" | "study"> & { preview?: string; case?: boolean };
 
 const priv = { kind: "private", label: "Private repository" } as const;
 
-export const projects: Project[] = [
+export const projects: LegacyProject[] = [
   {
     slug: "thinkup-intra",
     name: "ThinkUp-Intra",
@@ -208,6 +222,6 @@ export const projects: Project[] = [
 ];
 
 // Host shown as the link text, for example "joben.eu".
-export const liveHost = (url: string) => new URL(url).host.replace(/^www./, "");
+export const liveHost = (url: string) => new URL(url).host.replace(/^www\./, "");
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
