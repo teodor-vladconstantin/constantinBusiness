@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageTitle, Section } from "@/components/section";
-import { indexedPosts } from "@/lib/blog";
+import { getPosts } from "@/lib/posts-db";
 
 export const metadata: Metadata = { title: "Blog" };
 
-export default function Blog() {
-  const posts = indexedPosts();
+export default async function Blog() {
+  const posts = await getPosts();
   return (
     <>
       <PageTitle label="Blog" title="Notes" />
@@ -19,7 +19,10 @@ export default function Blog() {
               <li key={p.slug} className="border-b border-line">
                 <Link href={`/blog/${p.slug}`} className="row-invert grid grid-cols-12 gap-x-3 px-1 py-2">
                   <span className="label col-span-3">{p.date}</span>
-                  <span className="col-span-9">{p.title}</span>
+                  <span className="col-span-9">
+                    {p.title}
+                    {p.excerpt && <span className="mt-1 block text-[15px] leading-snug text-muted">{p.excerpt}</span>}
+                  </span>
                 </Link>
               </li>
             ))}
