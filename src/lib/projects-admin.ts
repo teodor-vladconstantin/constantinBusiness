@@ -61,11 +61,11 @@ export async function adminSetPublished(id: string, published: boolean): Promise
   if (error) throw new Error("Could not update the project.");
 }
 
-export async function uploadImage(slug: string, file: File): Promise<{ ok: true; path: string } | { ok: false; error: string }> {
+export async function uploadImage(dir: string, file: File): Promise<{ ok: true; path: string } | { ok: false; error: string }> {
   const ext = TYPES[file.type];
   if (!ext) return { ok: false, error: "Images must be png, jpeg or webp." };
   if (file.size > MAX_BYTES) return { ok: false, error: "Each image must be 5 MB or smaller." };
-  const path = `projects/${slug}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+  const path = `${dir}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
   const { error } = await supabaseAdmin().storage.from(BUCKET).upload(path, file, { contentType: file.type });
   if (error) return { ok: false, error: "Could not upload an image." };
   return { ok: true, path };

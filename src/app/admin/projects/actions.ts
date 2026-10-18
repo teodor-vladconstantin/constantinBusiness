@@ -33,7 +33,7 @@ export async function saveProject(_prev: ProjectFormState, formData: FormData): 
   const removed: string[] = [];
   const previewFile = formData.get("previewFile");
   if (previewFile instanceof File && previewFile.size > 0) {
-    const up = await uploadImage(parsed.value.slug, previewFile);
+    const up = await uploadImage(`projects/${parsed.value.slug}`, previewFile);
     if (!up.ok) return { error: up.error };
     if (previewPath) removed.push(previewPath);
     previewPath = up.path;
@@ -48,7 +48,7 @@ export async function saveProject(_prev: ProjectFormState, formData: FormData): 
   for (const p of existing?.result_images ?? []) if (drop.has(p)) removed.push(p);
   for (const f of formData.getAll("resultFiles")) {
     if (f instanceof File && f.size > 0) {
-      const up = await uploadImage(parsed.value.slug, f);
+      const up = await uploadImage(`projects/${parsed.value.slug}`, f);
       if (!up.ok) return { error: up.error };
       resultImages = [...resultImages, up.path];
     }
