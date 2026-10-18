@@ -3,7 +3,7 @@ import { Rule } from "@/components/motion";
 import { PageTitle } from "@/components/section";
 
 export const metadata: Metadata = {
-  title: "Philosophy",
+  title: "How I work",
   description: "How I work with clients: understand the real problem, scope small, ship fast and keep the budget in view.",
 };
 
@@ -38,15 +38,11 @@ const points = [
 export default function Philosophy() {
   return (
     <>
-      <PageTitle label="Philosophy" title="How I work with clients" />
+      <PageTitle label="How I work" title="How I work with clients" />
       <div className="container-site pb-16 md:pb-24">
         <div className="max-w-[720px]">
-          <p className="font-heading text-[clamp(1.5rem,3vw,2.25rem)] font-bold leading-[1.05] tracking-[-0.03em]">Judgment of humans. Speed of AI.</p>
-          <p className="prose-site mt-3">
+          <p className="prose-site">
             AI makes me faster at debugging and implementation. I decide the flows and the structure of the system and explain them clearly to the AI, because code written without that guidance works inside a system that makes no sense.
-          </p>
-          <p className="prose-site mt-2 text-muted">
-            I took the idea of pairing human judgment with the speed of AI from fastforward.dev.
           </p>
 
           {points.map((p, i) => (

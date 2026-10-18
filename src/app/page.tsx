@@ -27,13 +27,12 @@ export default function Home() {
           {site.name} / {site.role}
         </p>
         <h1 className="display">
-          <Reveal eager>
-            Judgment of humans.
-            <br />
-            Speed of AI.
-          </Reveal>
+          <Reveal eager>Working software for small teams, shipped on budget.</Reveal>
         </h1>
         <p className="mt-4 max-w-[56ch] text-[18px] leading-snug text-muted">{site.intro}</p>
+        <p className="mt-2 max-w-[56ch] text-[16px] leading-snug">
+          I deliver web apps, internal tools and AI integrations as fixed-price projects of 1 to 3 weeks.
+        </p>
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <Link href="/contact" className="bg-accent px-2 py-1 font-mono text-[12px] uppercase tracking-[0.08em] !text-black">
             Get in touch
@@ -64,7 +63,7 @@ export default function Home() {
 
       <section id="work" className="container-site pb-16 md:pb-24">
         <div className="mb-4 flex items-baseline justify-between border-t border-line pt-2">
-          <h2 className="label">Selected work</h2>
+          <h2 className="label">Work I've shipped</h2>
           <Link href="/work" className="label hover:!text-fg">
             All work →
           </Link>

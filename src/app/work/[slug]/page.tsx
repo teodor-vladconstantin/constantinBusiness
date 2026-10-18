@@ -33,15 +33,15 @@ export default async function ProjectPage({ params }: Props) {
 
   const blocks: Block[] = study
     ? [
-        { id: "problem", title: "The problem", paragraphs: study.problem },
-        { id: "missing", title: "What was broken or missing", paragraphs: study.missing },
+        { id: "problem", title: "Problem", paragraphs: study.problem },
+        { id: "missing", title: "What was missing", paragraphs: study.missing },
         { id: "investigation", title: "How I investigated", paragraphs: study.investigation },
-        { id: "decision", title: "What I built and decided", paragraphs: study.decision },
+        { id: "decision", title: "What I built", paragraphs: study.decision },
         { id: "result", title: "Result", paragraphs: study.result },
       ]
     : [
-        { id: "problem", title: "The problem", paragraphs: [project.problem] },
-        { id: "decision", title: "What I built and decided", paragraphs: [project.decision] },
+        { id: "problem", title: "Problem", paragraphs: [project.problem] },
+        { id: "decision", title: "What I built", paragraphs: [project.decision] },
         { id: "result", title: "Result", paragraphs: [project.result] },
         { id: "code", title: "In the code", list: project.inCode },
         { id: "scale", title: "Size", chips: project.scale },
@@ -59,7 +59,15 @@ export default async function ProjectPage({ params }: Props) {
         {study ? "Case study" : "Project"} / {project.year}
       </p>
       <h1 className="display">{project.name}</h1>
-      <p className="mt-3 max-w-[52ch] text-[18px] leading-snug text-muted">{project.oneLiner}</p>
+      {study?.summary ? (
+        <div className="mt-3 grid max-w-[56ch] gap-1 text-[18px] leading-snug">
+          {study.summary.map((t) => (
+            <p key={t}>{t}</p>
+          ))}
+        </div>
+      ) : (
+        <p className="mt-3 max-w-[52ch] text-[18px] leading-snug text-muted">{project.oneLiner}</p>
+      )}
 
       <dl className="mt-4 grid max-w-[720px] gap-2">
         {meta.map((m) => (
@@ -92,7 +100,7 @@ export default async function ProjectPage({ params }: Props) {
       )}
 
       <div className="mt-8 max-w-[720px]">
-        <ProjectLine />
+        <ProjectLine steps={blocks.map((b) => ({ id: b.id, label: b.title }))} />
         {blocks.map((b, i) => (
           <section key={b.id} id={b.id} className="scroll-mt-4 pt-12">
             <Rule />
@@ -106,6 +114,21 @@ export default async function ProjectPage({ params }: Props) {
                   </p>
                 ))}
               </div>
+            )}
+            {b.id === "decision" && study?.technical && (
+              <details className="group mt-3 border border-line">
+                <summary className="label cursor-pointer list-none px-2 py-1 hover:!text-fg">
+                  <span className="group-open:hidden">+ </span>
+                  <span className="hidden group-open:inline">- </span>Technical details
+                </summary>
+                <div className="grid gap-2 border-t border-line p-2">
+                  {study.technical.map((t) => (
+                    <p key={t} className="prose-site">
+                      {t}
+                    </p>
+                  ))}
+                </div>
+              </details>
             )}
             {b.list && (
               <ul className="border-t border-line">

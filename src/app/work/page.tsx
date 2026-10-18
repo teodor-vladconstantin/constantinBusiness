@@ -15,7 +15,7 @@ export default function Work() {
   const others = projects.filter((p) => !p.case);
   return (
     <>
-      <PageTitle label="Work" title="Selected work" />
+      <PageTitle label="Work" title="Work I've shipped" />
       <section className="container-site pb-16 md:pb-24">
         <p className="label mb-4 border-t border-line pt-2">Case studies</p>
         <div className="grid gap-x-3 gap-y-8 md:grid-cols-2">

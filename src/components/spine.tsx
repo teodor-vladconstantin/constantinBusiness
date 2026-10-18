@@ -68,19 +68,14 @@ export function Spine({ sections }: { sections: SpineSection[] }) {
   );
 }
 
-// Case study line: problem, decision, result as three connected dots linking to their sections.
-export function ProjectLine() {
-  const steps = [
-    { id: "problem", label: "Problem" },
-    { id: "decision", label: "Decision" },
-    { id: "result", label: "Result" },
-  ];
+// Page outline: one dot per section, linking to it. The last dot carries the accent.
+export function ProjectLine({ steps }: { steps: { id: string; label: string }[] }) {
   return (
-    <ol className="relative grid grid-cols-3" aria-label="Problem, decision, result">
-      <span aria-hidden className="absolute left-0 right-0 top-[3px] h-px bg-line" />
+    <ol className="relative grid gap-y-2 md:grid-flow-col md:auto-cols-fr md:gap-x-3" aria-label="Sections">
+      <span aria-hidden className="absolute left-0 right-0 top-[3px] hidden h-px bg-line md:block" />
       {steps.map((s, i) => (
-        <li key={s.id} className="relative pt-3">
-          <span aria-hidden className={`absolute left-0 top-0 block h-[7px] w-[7px] rounded-full ${i === steps.length - 1 ? "bg-accent" : "bg-fg"}`} />
+        <li key={s.id} className="relative pl-3 md:pl-0 md:pt-3">
+          <span aria-hidden className={`absolute left-0 top-[7px] block h-[7px] w-[7px] rounded-full md:top-0 ${i === steps.length - 1 ? "bg-accent" : "bg-fg"}`} />
           <a href={`#${s.id}`} className="label hover:!text-fg">
             {s.label}
           </a>

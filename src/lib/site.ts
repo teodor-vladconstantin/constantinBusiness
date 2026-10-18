@@ -6,7 +6,6 @@ export const site = {
   domain,
   url: process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.NODE_ENV === "production" ? `https://${domain}` : "http://localhost:3000"),
   role: "Independent forward deployed engineer",
-  tagline: "Judgment of humans. Speed of AI.",
   linkedin: "https://www.linkedin.com/in/dukuconstantin",
   github: "https://github.com/teodor-vladconstantin",
   emails: ["duku.constantin@gmail.com", "duku@joben.eu"],
@@ -16,7 +15,7 @@ export const site = {
 
 export const nav = [
   { href: "/work", label: "Work" },
-  { href: "/philosophy", label: "Philosophy" },
+  { href: "/philosophy", label: "How I work" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ] as const;
