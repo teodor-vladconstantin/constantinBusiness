@@ -35,6 +35,12 @@ const points = [
   },
 ];
 
+const steps = [
+  { title: "Understand", text: "I start from the problem the business has." },
+  { title: "Scope", text: "I cut the first version small enough to ship and learn from." },
+  { title: "Ship", text: "I deploy it and fix what real use shows." },
+];
+
 export default function Philosophy() {
   return (
     <>
@@ -44,6 +50,19 @@ export default function Philosophy() {
           <p className="prose-site">
             AI makes me faster at debugging and implementation. I decide the flows and the structure of the system and explain them clearly to the AI, because code written without that guidance works inside a system that makes no sense.
           </p>
+
+          <ol className="relative mt-8 grid gap-4 md:grid-cols-3 md:gap-3" aria-label="Three steps">
+            <span aria-hidden className="absolute left-0 right-0 top-[3px] hidden h-px bg-line md:block" />
+            {steps.map((s, i) => (
+              <li key={s.title} className="relative border-t border-line pt-3 md:border-t-0">
+                <span aria-hidden className={`absolute left-0 top-[-3px] block h-[7px] w-[7px] rounded-full md:top-0 ${i === steps.length - 1 ? "bg-accent" : "bg-fg"}`} />
+                <p className="label !text-fg md:pt-3">
+                  {String(i + 1).padStart(2, "0")} {s.title}
+                </p>
+                <p className="mt-1 max-w-[30ch] text-[15px] leading-snug text-muted">{s.text}</p>
+              </li>
+            ))}
+          </ol>
 
           {points.map((p, i) => (
             <section key={p.title} className="pt-12">

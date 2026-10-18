@@ -6,15 +6,8 @@ import { getProject } from "@/lib/projects";
 import { site } from "@/lib/site";
 
 const sections: SpineSection[] = [
-  { id: "process", label: "Process" },
   { id: "work", label: "Work" },
   { id: "contact", label: "Contact" },
-];
-
-const steps = [
-  { title: "Understand", text: "I start from the problem the business has." },
-  { title: "Scope", text: "I cut the first version small enough to ship and learn from." },
-  { title: "Ship", text: "I deploy it and fix what real use shows." },
 ];
 
 export default function Home() {
@@ -22,15 +15,14 @@ export default function Home() {
   return (
     <>
       <Spine sections={sections} />
-      <section className="container-site pb-16 pt-10 md:pt-16">
+      <section className="container-site pb-8 pt-10 md:pb-10 md:pt-16">
         <p className="label mb-3">
           {site.name} / {site.role}
         </p>
-        <h1 className="display">
+        <h1 className="display !text-[clamp(2rem,5vw,4.5rem)]">
           <Reveal eager>Working software for small teams, shipped on budget.</Reveal>
         </h1>
-        <p className="mt-4 max-w-[56ch] text-[18px] leading-snug text-muted">{site.intro}</p>
-        <p className="mt-2 max-w-[56ch] text-[16px] leading-snug">
+        <p className="mt-3 text-[16px] leading-snug text-muted">
           I deliver web apps, internal tools and AI integrations as fixed-price projects of 1 to 3 weeks.
         </p>
         <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -44,21 +36,6 @@ export default function Home() {
             LinkedIn ↗
           </a>
         </div>
-      </section>
-
-      <section id="process" className="container-site pb-16 md:pb-24">
-        <ol className="relative grid gap-4 md:grid-cols-3 md:gap-3" aria-label="How I work">
-          <span aria-hidden className="absolute left-0 right-0 top-[3px] hidden h-px bg-line md:block" />
-          {steps.map((s, i) => (
-            <li key={s.title} className="relative border-t border-line pt-3 md:border-t-0">
-              <span aria-hidden className={`absolute left-0 top-[-3px] block h-[7px] w-[7px] rounded-full md:top-0 ${i === steps.length - 1 ? "bg-accent" : "bg-fg"}`} />
-              <p className="label !text-fg md:pt-3">
-                {String(i + 1).padStart(2, "0")} {s.title}
-              </p>
-              <p className="mt-1 max-w-[30ch] text-[15px] leading-snug text-muted">{s.text}</p>
-            </li>
-          ))}
-        </ol>
       </section>
 
       <section id="work" className="container-site pb-16 md:pb-24">
