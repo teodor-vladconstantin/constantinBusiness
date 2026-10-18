@@ -19,17 +19,17 @@ export default function Home() {
       <Spine sections={sections} />
       <section className="container-site flex min-h-[calc(100svh-59px)] flex-col py-8">
         <div className="my-auto">
-        <p className="label mb-3">
+        <p className="label mb-4">
           {site.name} / {site.role}
         </p>
-        <h1 className="display !text-[clamp(2rem,5vw,4.5rem)]">
+        <h1 className="display !text-[clamp(2.5rem,10.5vw,4.5rem)] md:!text-[clamp(2rem,5vw,4.5rem)]">
           <Reveal eager>Working software for small teams, shipped on budget.</Reveal>
         </h1>
-        <p className="mt-3 text-[16px] leading-snug text-muted">
+        <p className="mt-4 text-[18px] leading-snug text-muted md:mt-3 md:text-[16px]">
           I deliver web apps, internal tools and AI integrations as fixed-price projects of 1 to 3 weeks.
         </p>
-        <div className="mt-4 flex flex-wrap items-center gap-3">
-          <Link href="/contact" className="bg-accent px-2 py-1 font-mono text-[12px] uppercase tracking-[0.08em] !text-black">
+        <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 md:mt-4">
+          <Link href="/contact" className="bg-accent px-3 py-[12px] font-mono text-[12px] uppercase tracking-[0.08em] !text-black md:px-2 md:py-1">
             Get in touch
           </Link>
           <a href={site.github} rel="noopener noreferrer" className="label hover:!text-fg">
