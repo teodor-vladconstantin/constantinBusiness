@@ -16,7 +16,7 @@ export default function Contact() {
         <ul className="mt-1 grid gap-2">
           {site.emails.map((e, i) => (
             <li key={e}>
-              <a className={`underline underline-offset-4 ${i === 0 ? "!text-accent" : ""}`} href={`mailto:${e}`}>
+              <a className={`!underline underline-offset-4 ${i === 0 ? "!text-accent" : ""}`} href={`mailto:${e}`}>
                 {e}
               </a>
             </li>
@@ -26,12 +26,12 @@ export default function Contact() {
       <Section n="02" title="Elsewhere">
         <ul className="grid gap-2">
           <li>
-            <a className="underline underline-offset-4" href={site.linkedin} rel="noopener noreferrer">
+            <a className="!underline underline-offset-4" href={site.linkedin} rel="noopener noreferrer">
               LinkedIn
             </a>
           </li>
           <li>
-            <a className="underline underline-offset-4" href={site.github} rel="noopener noreferrer">
+            <a className="!underline underline-offset-4" href={site.github} rel="noopener noreferrer">
               GitHub
             </a>
           </li>

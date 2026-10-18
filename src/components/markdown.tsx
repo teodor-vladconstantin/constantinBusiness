@@ -10,7 +10,7 @@ const components: Components = {
   ol: ({ children }) => <ol className="mb-3 list-decimal pl-3">{children}</ol>,
   li: ({ children }) => <li className="mb-1">{children}</li>,
   a: ({ href, children }) => (
-    <a href={href} target={href?.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="underline decoration-accent underline-offset-4">
+    <a href={href} target={href?.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="!underline !decoration-accent underline-offset-4">
       {children}
     </a>
   ),

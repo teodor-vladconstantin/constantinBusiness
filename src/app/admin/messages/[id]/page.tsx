@@ -19,7 +19,7 @@ export default async function MessagePage({ params }: { params: Promise<{ id: st
       <p className="label mt-3">{new Date(m.created_at).toLocaleString("en-GB", { dateStyle: "long", timeStyle: "short" })}</p>
       <h1 className="title mt-1">{m.name}</h1>
       <p className="mt-1">
-        <a className="underline underline-offset-4" href={`mailto:${m.email}`}>
+        <a className="!underline underline-offset-4" href={`mailto:${m.email}`}>
           {m.email}
         </a>
       </p>

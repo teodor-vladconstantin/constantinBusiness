@@ -74,7 +74,7 @@ export default async function Home() {
       <section id="contact" className="container-site py-16 md:py-24">
         <div className="border-t border-line pt-2">
           <p className="label mb-2">Contact</p>
-          <a className="font-heading text-[clamp(1.25rem,5.2vw,3rem)] font-bold leading-none tracking-[-0.03em] [overflow-wrap:anywhere] underline decoration-accent underline-offset-8" href={`mailto:${site.emails[0]}`}>
+          <a className="font-heading text-[clamp(1.25rem,5.2vw,3rem)] font-bold leading-none tracking-[-0.03em] [overflow-wrap:anywhere] !underline !decoration-accent underline-offset-8" href={`mailto:${site.emails[0]}`}>
             {site.emails[0]}
           </a>
           <p className="mt-3 max-w-[52ch] text-muted">Send a short description of the problem and the budget range.</p>
