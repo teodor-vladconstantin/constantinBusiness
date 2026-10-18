@@ -33,7 +33,7 @@ Each phase gets its own plan and ships on its own.
 
 `messages`: id, name, email, message, created_at, read (bool). No public access.
 
-`projects`: slug (unique), name, year, one_liner, role, team, context, stack (text[]), problem, decision, result, in_code (jsonb: text and path), scale (text[]), repo_kind (public, team, private), repo_url, repo_label, live_url, preview_path, result_images (text[] of storage paths), internal (bool), position (int), published (bool), study (jsonb, nullable: summary, problem, missing, investigation, decision, technical, result, each a list of paragraphs).
+`projects`: slug (unique), name, year, one_liner, role, team, context, stack (text[]), problem, decision, result, in_code (jsonb: text and path), scale (text[]), repo_kind (none, public, team, private), repo_url (the label is derived from the kind), live_url, preview_path, result_images (text[] of storage paths), internal (bool), position (int), published (bool), study (jsonb, nullable: summary, problem, missing, investigation, decision, technical, result, each a list of paragraphs).
 
 `posts`: slug (unique), title, excerpt, body_md, status (draft, published), published_at.
 
