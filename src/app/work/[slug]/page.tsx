@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Rule } from "@/components/motion";
 import { ProjectLine } from "@/components/spine";
 import { TechChip } from "@/components/tech-chip";
 import { RepoLink } from "@/components/work-card";
-import { cases, getCase } from "@/lib/cases";
-import { getProject } from "@/lib/projects";
+import { getCase } from "@/lib/cases";
+import { getProject, liveHost, projects } from "@/lib/projects";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return cases.map((c) => ({ slug: c.slug }));
+  return projects.map((p) => ({ slug: p.slug }));
 }
 
 type Props = { params: Promise<{ slug: string }> };
@@ -19,29 +20,55 @@ type Props = { params: Promise<{ slug: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const p = getProject(slug);
-  return { title: `${p?.name ?? "Case study"} case study`, description: p?.oneLiner };
+  return { title: `${p?.name ?? "Project"}${getCase(slug) ? " case study" : ""}`, description: p?.oneLiner };
 }
 
-const blocks = [
-  { id: "problem", title: "The problem", key: "problem" },
-  { id: "missing", title: "What was broken or missing", key: "missing" },
-  { id: "investigation", title: "How I investigated", key: "investigation" },
-  { id: "decision", title: "What I built and decided", key: "decision" },
-  { id: "result", title: "Result", key: "result" },
-] as const;
+type Block = { id: string; title: string; paragraphs?: string[]; list?: { text: string; path?: string }[]; chips?: string[] };
 
-export default async function CasePage({ params }: Props) {
+export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
   const project = getProject(slug);
+  if (!project) notFound();
   const study = getCase(slug);
-  if (!project || !study) notFound();
+
+  const blocks: Block[] = study
+    ? [
+        { id: "problem", title: "The problem", paragraphs: study.problem },
+        { id: "missing", title: "What was broken or missing", paragraphs: study.missing },
+        { id: "investigation", title: "How I investigated", paragraphs: study.investigation },
+        { id: "decision", title: "What I built and decided", paragraphs: study.decision },
+        { id: "result", title: "Result", paragraphs: study.result },
+      ]
+    : [
+        { id: "problem", title: "The problem", paragraphs: [project.problem] },
+        { id: "decision", title: "What I built and decided", paragraphs: [project.decision] },
+        { id: "result", title: "Result", paragraphs: [project.result] },
+        { id: "code", title: "In the code", list: project.inCode },
+        { id: "scale", title: "Size", chips: project.scale },
+      ];
+
+  const meta = [
+    { k: "Role", v: project.role },
+    project.team && { k: "Team", v: project.team },
+    project.context && { k: "Context", v: project.context },
+  ].filter(Boolean) as { k: string; v: string }[];
 
   return (
-    <article className="container-site pb-24 pt-10 md:pt-16">
-      <p className="label mb-2">Case study / {project.year}</p>
+    <article className="container-site pb-16 pt-10 md:pb-24 md:pt-16">
+      <p className="label mb-2">
+        {study ? "Case study" : "Project"} / {project.year}
+      </p>
       <h1 className="display">{project.name}</h1>
       <p className="mt-3 max-w-[52ch] text-[18px] leading-snug text-muted">{project.oneLiner}</p>
-      {study.note && <p className="label mt-3 border border-line px-2 py-1">{study.note}</p>}
+
+      <dl className="mt-4 grid max-w-[720px] gap-2">
+        {meta.map((m) => (
+          <div key={m.k} className="grid gap-x-3 md:grid-cols-[96px_1fr]">
+            <dt className="label">{m.k}</dt>
+            <dd>{m.v}</dd>
+          </div>
+        ))}
+      </dl>
 
       <ul className="mt-3 flex flex-wrap gap-[6px]">
         {project.stack.map((t) => (
@@ -52,9 +79,10 @@ export default async function CasePage({ params }: Props) {
         <RepoLink p={project} />
         {project.live && (
           <a href={project.live} target="_blank" rel="noopener noreferrer" className="label hover:!text-fg">
-            Live site ↗
+            {liveHost(project.live)} ↗
           </a>
         )}
+        {project.internal && <span className="label">Internal tool</span>}
       </div>
 
       {project.preview && (
@@ -70,16 +98,43 @@ export default async function CasePage({ params }: Props) {
             <Rule />
             <p className="label pt-3">{String(i + 1).padStart(2, "0")}</p>
             <h2 className="title mb-2 mt-1">{b.title}</h2>
-            <div className="grid gap-2">
-              {study[b.key].map((t) => (
-                <p key={t} className="prose-site">
-                  {t}
-                </p>
-              ))}
-            </div>
+            {b.paragraphs && (
+              <div className="grid gap-2">
+                {b.paragraphs.map((t) => (
+                  <p key={t} className="prose-site">
+                    {t}
+                  </p>
+                ))}
+              </div>
+            )}
+            {b.list && (
+              <ul className="border-t border-line">
+                {b.list.map((c) => (
+                  <li key={c.text + c.path} className="border-b border-line py-2">
+                    <p className="prose-site">{c.text}</p>
+                    {c.path && <p className="label mt-1 break-all">{c.path}</p>}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {b.chips && (
+              <ul className="flex flex-wrap gap-x-3 gap-y-1">
+                {b.chips.map((s) => (
+                  <li key={s} className="label !text-fg">
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            )}
           </section>
         ))}
       </div>
+
+      <p className="mt-12 border-t border-line pt-3">
+        <Link href="/work" className="label hover:!text-fg">
+          ← All work
+        </Link>
+      </p>
     </article>
   );
 }

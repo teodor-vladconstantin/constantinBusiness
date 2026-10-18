@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Project } from "@/lib/projects";
+import { liveHost, type Project } from "@/lib/projects";
 import { TechChip } from "./tech-chip";
 
 // Featured project: preview, name, one line, tools, links. The title link covers the card.
@@ -46,7 +46,7 @@ export function WorkCard({ p, priority = false, as: Heading = "h3" }: { p: Proje
         <RepoLink p={p} />
         {p.live && (
           <a href={p.live} target="_blank" rel="noopener noreferrer" className="label hover:!text-fg">
-            Live site ↗
+            {liveHost(p.live)} ↗
           </a>
         )}
       </div>

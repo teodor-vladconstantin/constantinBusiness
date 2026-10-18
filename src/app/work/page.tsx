@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageTitle } from "@/components/section";
 import { TechChip } from "@/components/tech-chip";
 import { RepoLink, WorkCard } from "@/components/work-card";
-import { projects } from "@/lib/projects";
+import { liveHost, projects } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "Work",
-  description: "Two case studies, Nyra and Joben, and five other projects: an intranet, a recruitment portal, a habit app, a youth platform and a shop.",
+  description: "Seven projects with a page each: two case studies, Nyra and Joben, and an intranet, a recruitment portal, a habit app, a youth platform and a shop.",
 };
 
 export default function Work() {
@@ -29,7 +30,11 @@ export default function Work() {
         <ul>
           {others.map((p) => (
             <li key={p.slug} className="grid gap-x-3 gap-y-1 border-b border-line py-3 md:grid-cols-12">
-              <h2 className="font-heading text-[22px] font-bold leading-none tracking-[-0.03em] md:col-span-3">{p.name}</h2>
+              <h2 className="font-heading text-[22px] font-bold leading-none tracking-[-0.03em] md:col-span-3">
+                <Link href={`/work/${p.slug}`} className="hover:!text-accent">
+                  {p.name}
+                </Link>
+              </h2>
               <div className="md:col-span-6">
                 <p className="max-w-[52ch] text-[16px] leading-snug">{p.oneLiner}</p>
                 <ul className="mt-2 flex flex-wrap gap-[6px]">
@@ -39,10 +44,13 @@ export default function Work() {
                 </ul>
               </div>
               <div className="flex flex-wrap items-start gap-x-3 gap-y-1 md:col-span-3 md:justify-end">
+                <Link href={`/work/${p.slug}`} className="label !text-fg">
+                  Details →
+                </Link>
                 <RepoLink p={p} />
                 {p.live && (
                   <a href={p.live} target="_blank" rel="noopener noreferrer" className="label hover:!text-fg">
-                    Live site ↗
+                    {liveHost(p.live)} ↗
                   </a>
                 )}
               </div>

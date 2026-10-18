@@ -43,7 +43,7 @@ export const projects: Project[] = [
     decision:
       "Postgres row level security decides access. The interface mirrors those rules and server actions check them again. A county changes zone only through one database function, and the map color comes from the zone table.",
     result:
-      "An invite-only intranet with 6 roles, 3 departments and a student platform. Schools and ambassador students follow their county when it changes zone. More than 20 ThinkUp people use it daily to assign tasks, create projects, follow ambassador students and give feedback.",
+      "An internal, invite-only intranet with 6 roles, 3 departments and a student platform. Schools and ambassador students follow their county when it changes zone. More than 20 ThinkUp people use it daily to assign tasks, create projects, follow ambassador students and give feedback.",
     inCode: [
       { text: "Permission rules are pure functions with tests.", path: "src/lib/permissions.ts" },
       { text: "The service role key lives in one server-only file.", path: "src/lib/supabase/admin.ts" },
@@ -77,6 +77,7 @@ export const projects: Project[] = [
     scale: ["16 commits", "11 migrations", "7 database test files", "PDF and DOCX up to 10 MB"],
     repo: priv,
     preview: "nyra.png",
+    live: "https://nyra.joben.eu",
     case: true,
   },
   {
@@ -129,7 +130,7 @@ export const projects: Project[] = [
     ],
     scale: ["156 commits", "16 migrations", "5 Edge Functions", "25 habits on 5 paths, 10 levels"],
     repo: { kind: "team", label: "Team repository", url: "https://github.com/Vladutziss/HSIC" },
-    live: "https://www.molted.eu",
+    live: "https://molted.eu",
     preview: "molted.png",
   },
   {
@@ -141,11 +142,11 @@ export const projects: Project[] = [
     team: "Team of 3, built with the ThinkUp team.",
     stack: ["Vite", "React", "TypeScript", "Tailwind", "shadcn/ui", "Supabase"],
     problem:
-      "ThinkUp Academy needed a public site and a way to receive and review membership applications, with staff managing the content themselves.",
+      "ThinkUp Academy needed a presentation site for think-up.academy and the infrastructure of its recruitment system, with staff managing the content themselves.",
     decision:
       "Recruitment opens and closes from settings, and the form stays hidden if the setting cannot be read. Admin sections are gated by role, and an Edge Function creates admin accounts.",
     result:
-      "A public site with departments, blog, partners and contact, and an admin dashboard for applications, members, content and recruitment status.",
+      "The presentation site of think-up.academy, with departments, blog, partners and contact. Behind it sits the recruitment system: an admin dashboard for applications, members, content and recruitment status.",
     inCode: [
       { text: "The application form fails closed when the recruitment setting cannot be read.", path: "src/pages/JoinUs.tsx" },
       { text: "Routes and navigation are gated by role.", path: "src/pages/admin" },
@@ -155,6 +156,7 @@ export const projects: Project[] = [
     scale: ["49 commits", "9 migrations"],
     repo: { kind: "public", label: "Repository", url: "https://github.com/teodor-vladconstantin/thinkup-gateway" },
     preview: "thinkup-gateway.png",
+    live: "https://think-up.academy",
   },
   {
     slug: "divein",
@@ -205,5 +207,8 @@ export const projects: Project[] = [
     preview: "airlife.png",
   },
 ];
+
+// Host shown as the link text, for example "joben.eu".
+export const liveHost = (url: string) => new URL(url).host.replace(/^www./, "");
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
