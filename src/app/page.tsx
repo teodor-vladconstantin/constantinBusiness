@@ -4,7 +4,7 @@ import { Spine, type SpineSection } from "@/components/spine";
 import { LazyContactForm } from "@/components/lazy-contact-form";
 import { ProjectsRail } from "@/components/projects-rail";
 import { WorkCard } from "@/components/work-card";
-import { getProject, projects } from "@/lib/projects";
+import { getProjects } from "@/lib/projects-db";
 import { site } from "@/lib/site";
 
 const sections: SpineSection[] = [
@@ -12,9 +12,10 @@ const sections: SpineSection[] = [
   { id: "contact", label: "Contact" },
 ];
 
-export default function Home() {
-  const featured = ["joben", "nyra"].map((s) => getProject(s)!);
-  const others = projects.filter((p) => !featured.includes(p));
+export default async function Home() {
+  const all = await getProjects();
+  const featured = all.filter((p) => p.study).slice(0, 2);
+  const others = all.filter((p) => !featured.includes(p));
   return (
     <>
       <Spine sections={sections} />

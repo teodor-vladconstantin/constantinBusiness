@@ -1,5 +1,3 @@
-import fs from "node:fs";
-import path from "node:path";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,32 +6,29 @@ import { Rule } from "@/components/motion";
 import { ProjectLine } from "@/components/spine";
 import { TechChip } from "@/components/tech-chip";
 import { RepoLink } from "@/components/work-card";
-import { getCase } from "@/lib/cases";
-import { getProject, liveHost, projects } from "@/lib/projects";
+import { liveHost } from "@/lib/projects";
+import { getProject, getProjects } from "@/lib/projects-db";
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  return (await getProjects()).map((p) => ({ slug: p.slug }));
 }
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const p = getProject(slug);
-  return { title: `${p?.name ?? "Project"}${getCase(slug) ? " case study" : ""}`, description: p?.oneLiner };
+  const p = await getProject(slug);
+  return { title: `${p?.name ?? "Project"}${p?.study ? " case study" : ""}`, description: p?.oneLiner };
 }
 
 type Block = { id: string; title: string; images?: string[]; paragraphs?: string[]; list?: { text: string; path?: string }[]; chips?: string[] };
 
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = await getProject(slug);
   if (!project) notFound();
-  const study = getCase(slug);
-  // Result screenshots: drop public/previews/<slug>-result-1.png, -2.png ... and they appear under Result.
-  const resultImages = fs.readdirSync(path.join(process.cwd(), "public/previews")).filter((n) => n.startsWith(`${slug}-result-`)).sort();
+  const study = project.study;
+  const resultImages = project.resultImages ?? [];
 
   const blocks: Block[] = study
     ? [
@@ -99,7 +94,7 @@ export default async function ProjectPage({ params }: Props) {
 
       {project.preview && (
         <div className="relative mt-6 aspect-[16/9] overflow-hidden border border-line">
-          <Image src={`/previews/${project.preview}`} alt={`${project.name} homepage`} fill priority sizes="(min-width: 1248px) 1200px, 100vw" className="object-cover object-top" />
+          <Image src={project.preview} alt={`${project.name} homepage`} fill priority sizes="(min-width: 1248px) 1200px, 100vw" className="object-cover object-top" />
         </div>
       )}
 
@@ -138,7 +133,7 @@ export default async function ProjectPage({ params }: Props) {
               <div className="mt-3 grid gap-2 md:grid-cols-2">
                 {b.images.map((n, i) => (
                   <div key={n} className="relative aspect-[16/9] overflow-hidden border border-line">
-                    <Image src={`/previews/${n}`} alt={`${project.name} result ${i + 1}`} fill sizes="(min-width: 768px) 360px, 100vw" className="object-cover object-top" />
+                    <Image src={n} alt={`${project.name} result ${i + 1}`} fill sizes="(min-width: 768px) 360px, 100vw" className="object-cover object-top" />
                   </div>
                 ))}
               </div>

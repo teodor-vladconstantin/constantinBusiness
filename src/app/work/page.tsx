@@ -3,16 +3,18 @@ import Link from "next/link";
 import { PageTitle } from "@/components/section";
 import { TechChip } from "@/components/tech-chip";
 import { RepoLink, WorkCard } from "@/components/work-card";
-import { liveHost, projects } from "@/lib/projects";
+import { liveHost } from "@/lib/projects";
+import { getProjects } from "@/lib/projects-db";
 
 export const metadata: Metadata = {
   title: "Work",
   description: "Seven projects with a page each: two case studies, Nyra and Joben, and an intranet, a recruitment portal, a habit app, a youth platform and a shop.",
 };
 
-export default function Work() {
-  const cases = projects.filter((p) => p.case);
-  const others = projects.filter((p) => !p.case);
+export default async function Work() {
+  const projects = await getProjects();
+  const cases = projects.filter((p) => p.study);
+  const others = projects.filter((p) => !p.study);
   return (
     <>
       <PageTitle label="Work" title="Work I've shipped" />

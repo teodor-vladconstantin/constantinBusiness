@@ -10,7 +10,7 @@ export function WorkCard({ p, priority = false, as: Heading = "h3" }: { p: Proje
       <div className="relative aspect-[16/9] overflow-hidden border border-line bg-[#18181b]">
         {p.preview ? (
           <Image
-            src={`/previews/${p.preview}`}
+            src={p.preview}
             alt={`${p.name} homepage`}
             fill
             priority={priority}
