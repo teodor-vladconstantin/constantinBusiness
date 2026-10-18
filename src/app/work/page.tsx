@@ -15,16 +15,16 @@ export default function Work() {
   return (
     <>
       <PageTitle label="Work" title="Selected work" />
-      <section className="container-site pb-24">
+      <section className="container-site pb-16 md:pb-24">
         <p className="label mb-4 border-t border-line pt-2">Case studies</p>
         <div className="grid gap-x-3 gap-y-8 md:grid-cols-2">
           {cases.map((p, i) => (
-            <WorkCard key={p.slug} p={p} priority={i === 0} />
+            <WorkCard key={p.slug} p={p} priority={i === 0} as="h2" />
           ))}
         </div>
       </section>
 
-      <section className="container-site pb-24">
+      <section className="container-site pb-16 md:pb-24">
         <p className="label border-t border-line pt-2">Other projects</p>
         <ul>
           {others.map((p) => (

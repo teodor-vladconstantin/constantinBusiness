@@ -4,7 +4,7 @@ import type { Project } from "@/lib/projects";
 import { TechChip } from "./tech-chip";
 
 // Featured project: preview, name, one line, tools, links. The title link covers the card.
-export function WorkCard({ p, priority = false }: { p: Project; priority?: boolean }) {
+export function WorkCard({ p, priority = false, as: Heading = "h3" }: { p: Project; priority?: boolean; as?: "h2" | "h3" }) {
   return (
     <article className="group relative flex flex-col">
       <div className="relative aspect-[16/10] overflow-hidden border border-line bg-[#18181b]">
@@ -15,6 +15,7 @@ export function WorkCard({ p, priority = false }: { p: Project; priority?: boole
             fill
             priority={priority}
             sizes="(min-width: 1024px) 576px, 100vw"
+            quality={70}
             className="object-cover object-top transition-transform duration-[900ms] ease-site group-hover:scale-[1.03]"
           />
         ) : (
@@ -25,11 +26,11 @@ export function WorkCard({ p, priority = false }: { p: Project; priority?: boole
         )}
       </div>
       <div className="mt-2 flex items-baseline justify-between gap-2">
-        <h3 className="font-heading text-[26px] font-bold leading-none tracking-[-0.03em]">
+        <Heading className="font-heading text-[26px] font-bold leading-none tracking-[-0.03em]">
           <Link href={`/work/${p.slug}`} className="after:absolute after:inset-0">
             {p.name}
           </Link>
-        </h3>
+        </Heading>
         <span className="label">{p.year}</span>
       </div>
       <p className="mt-1 max-w-[46ch] text-[15px] leading-snug text-muted">{p.oneLiner}</p>

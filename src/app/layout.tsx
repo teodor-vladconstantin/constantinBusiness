@@ -10,8 +10,8 @@ import "./globals.css";
 
 // next/font reads these options at build time, so they must be literals.
 const poppins = Poppins({ subsets: ["latin", "latin-ext"], weight: "700", variable: "--font-poppins", display: "swap" });
-const inter = Inter({ subsets: ["latin", "latin-ext"], weight: ["400", "700"], variable: "--font-inter", display: "swap", preload: false });
-const mono = JetBrains_Mono({ subsets: ["latin", "latin-ext"], weight: "400", variable: "--font-jetbrains", display: "swap", preload: false });
+const inter = Inter({ subsets: ["latin", "latin-ext"], variable: "--font-inter", display: "optional" });
+const mono = JetBrains_Mono({ subsets: ["latin", "latin-ext"], weight: "400", variable: "--font-jetbrains", display: "optional" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),

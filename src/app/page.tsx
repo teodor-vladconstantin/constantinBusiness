@@ -35,7 +35,7 @@ export default function Home() {
         </h1>
         <p className="mt-4 max-w-[56ch] text-[18px] leading-snug text-muted">{site.intro}</p>
         <div className="mt-4 flex flex-wrap items-center gap-3">
-          <Link href="/contact" className="bg-accent px-2 py-1 font-mono text-[12px] uppercase tracking-[0.08em] text-black">
+          <Link href="/contact" className="bg-accent px-2 py-1 font-mono text-[12px] uppercase tracking-[0.08em] !text-black">
             Get in touch
           </Link>
           <a href={site.github} rel="noopener noreferrer" className="label hover:!text-fg">
@@ -47,7 +47,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="process" className="container-site pb-24">
+      <section id="process" className="container-site pb-16 md:pb-24">
         <ol className="relative grid gap-4 md:grid-cols-3 md:gap-3" aria-label="How I work">
           <span aria-hidden className="absolute left-0 right-0 top-[3px] hidden h-px bg-line md:block" />
           {steps.map((s, i) => (
@@ -62,7 +62,7 @@ export default function Home() {
         </ol>
       </section>
 
-      <section id="work" className="container-site pb-24">
+      <section id="work" className="container-site pb-16 md:pb-24">
         <div className="mb-4 flex items-baseline justify-between border-t border-line pt-2">
           <h2 className="label">Selected work</h2>
           <Link href="/work" className="label hover:!text-fg">
@@ -76,10 +76,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="container-site pb-24">
+      <section id="contact" className="container-site pb-16 md:pb-24">
         <div className="border-t border-line pt-2">
           <p className="label mb-2">Contact</p>
-          <a className="font-heading text-[clamp(1.75rem,4vw,3rem)] font-bold leading-none tracking-[-0.03em] underline decoration-accent underline-offset-8" href={`mailto:${site.emails[0]}`}>
+          <a className="font-heading text-[clamp(1.25rem,5.2vw,3rem)] font-bold leading-none tracking-[-0.03em] [overflow-wrap:anywhere] underline decoration-accent underline-offset-8" href={`mailto:${site.emails[0]}`}>
             {site.emails[0]}
           </a>
           <p className="mt-3 max-w-[52ch] text-muted">Send a short description of the problem and the budget range.</p>

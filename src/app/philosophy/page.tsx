@@ -41,7 +41,7 @@ export default function Philosophy() {
   return (
     <>
       <PageTitle label="Philosophy / Draft" title="How I work with clients" />
-      <div className="container-site pb-24">
+      <div className="container-site pb-16 md:pb-24">
         <p className="label mb-4 border border-line px-2 py-1">Draft for Duku to rewrite in his own voice.</p>
         <div className="max-w-[720px]">
           <p className="font-heading text-[clamp(1.5rem,3vw,2.25rem)] font-bold leading-[1.05] tracking-[-0.03em]">Judgment of humans. Speed of AI.</p>
