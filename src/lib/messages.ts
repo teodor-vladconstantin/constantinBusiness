@@ -4,8 +4,13 @@ import { supabaseAdmin } from "@/lib/supabase/admin";
 export type Message = { id: string; name: string; email: string; message: string; read: boolean; created_at: string };
 
 export async function insertMessage(v: { name: string; email: string; message: string }): Promise<boolean> {
-  const { error } = await supabaseAdmin().from("messages").insert(v);
-  return !error;
+  try {
+    const { error } = await supabaseAdmin().from("messages").insert(v);
+    return !error;
+  } catch {
+    // Missing or wrong Supabase settings. The visitor sees a retry message.
+    return false;
+  }
 }
 
 export async function listMessages(): Promise<Message[]> {

@@ -57,6 +57,11 @@ describe("verifyTurnstile", () => {
     expect(await verifyTurnstile("tok", { secret: "s", hostnames: ["example.com"], fetchImpl: f })).toBe(true);
   });
 
+  it("accepts a Cloudflare test key response that has no action", async () => {
+    const f = reply({ success: true, hostname: "example.com", metadata: { result_with_testing_key: true } });
+    expect(await verifyTurnstile("tok", { secret: "s", hostnames: ["mysite.com"], fetchImpl: f })).toBe(true);
+  });
+
   it("rejects a non-OK HTTP response", async () => {
     expect(await verifyTurnstile("tok", { secret: "s", fetchImpl: reply({ success: true }, false) })).toBe(false);
   });

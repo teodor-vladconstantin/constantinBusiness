@@ -27,8 +27,10 @@ export async function verifyTurnstile(token: string, opts: TurnstileOptions = {}
   try {
     const res = await (opts.fetchImpl ?? fetch)(SITEVERIFY, { method: "POST", body });
     if (!res.ok) return false;
-    const data = (await res.json()) as { success?: boolean; action?: string; hostname?: string };
+    const data = (await res.json()) as { success?: boolean; action?: string; hostname?: string; metadata?: { result_with_testing_key?: boolean } };
     if (data.success !== true) return false;
+    // Cloudflare test keys return no action and a fixed hostname. Only the real keys are held to both checks.
+    if (data.metadata?.result_with_testing_key === true) return true;
     if (data.action !== (opts.action ?? "contact")) return false;
     const allowed = opts.hostnames ?? envHostnames();
     if (allowed.length > 0 && !allowed.includes(data.hostname ?? "")) return false;
