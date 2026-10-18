@@ -22,7 +22,6 @@ export type Project = {
   scale: string[];
   repo?: RepoLink; // omitted when no repository is shown
   preview?: string; // file in public/previews
-  previewSmall?: boolean; // low-resolution image: shown at its own size, not stretched
   internal?: boolean; // internal tool, no public product page
   case?: boolean; // has a full case study at /work/<slug>
   live?: string;
@@ -180,8 +179,6 @@ export const projects: Project[] = [
     ],
     scale: ["74 commits", "19 routes", "4 migrations"],
     repo: { kind: "public", label: "Repository", url: "https://github.com/TeodorCtin/divein-buzau-final" },
-    preview: "divein.png",
-    previewSmall: true,
   },
   {
     slug: "airlife",
