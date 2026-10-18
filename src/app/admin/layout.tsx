@@ -14,6 +14,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           <Link href="/admin/messages" className="label !text-fg">
             Messages
           </Link>
+          <Link href="/admin/projects" className="label !text-fg">
+            Projects
+          </Link>
         </nav>
         <form action={signOut} className="flex items-center gap-2">
           <span className="label">{email}</span>
