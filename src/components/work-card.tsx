@@ -7,7 +7,7 @@ import { TechChip } from "./tech-chip";
 export function WorkCard({ p, priority = false, as: Heading = "h3" }: { p: Project; priority?: boolean; as?: "h2" | "h3" }) {
   return (
     <article className="group relative flex flex-col">
-      <div className="relative aspect-[16/10] overflow-hidden border border-line bg-[#18181b]">
+      <div className="relative aspect-[16/9] overflow-hidden border border-line bg-[#18181b]">
         {p.preview ? (
           <Image
             src={`/previews/${p.preview}`}

@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,13 +25,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: `${p?.name ?? "Project"}${getCase(slug) ? " case study" : ""}`, description: p?.oneLiner };
 }
 
-type Block = { id: string; title: string; paragraphs?: string[]; list?: { text: string; path?: string }[]; chips?: string[] };
+type Block = { id: string; title: string; images?: string[]; paragraphs?: string[]; list?: { text: string; path?: string }[]; chips?: string[] };
 
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) notFound();
   const study = getCase(slug);
+  // Result screenshots: drop public/previews/<slug>-result-1.png, -2.png ... and they appear under Result.
+  const resultImages = fs.readdirSync(path.join(process.cwd(), "public/previews")).filter((n) => n.startsWith(`${slug}-result-`)).sort();
 
   const blocks: Block[] = study
     ? [
@@ -37,12 +41,12 @@ export default async function ProjectPage({ params }: Props) {
         { id: "missing", title: "What was missing", paragraphs: study.missing },
         { id: "investigation", title: "How I investigated", paragraphs: study.investigation },
         { id: "decision", title: "What I built", paragraphs: study.decision },
-        { id: "result", title: "Result", paragraphs: study.result },
+        { id: "result", title: "Result", paragraphs: study.result, images: resultImages },
       ]
     : [
         { id: "problem", title: "Problem", paragraphs: [project.problem] },
         { id: "decision", title: "What I built", paragraphs: [project.decision] },
-        { id: "result", title: "Result", paragraphs: [project.result] },
+        { id: "result", title: "Result", paragraphs: [project.result], images: resultImages },
         { id: "code", title: "In the code", list: project.inCode },
         { id: "scale", title: "Size", chips: project.scale },
       ];
@@ -94,7 +98,7 @@ export default async function ProjectPage({ params }: Props) {
       </div>
 
       {project.preview && (
-        <div className="relative mt-6 aspect-[16/10] overflow-hidden border border-line">
+        <div className="relative mt-6 aspect-[16/9] overflow-hidden border border-line">
           <Image src={`/previews/${project.preview}`} alt={`${project.name} homepage`} fill priority sizes="(min-width: 1248px) 1200px, 100vw" className="object-cover object-top" />
         </div>
       )}
@@ -129,6 +133,15 @@ export default async function ProjectPage({ params }: Props) {
                   ))}
                 </div>
               </details>
+            )}
+            {b.images && b.images.length > 0 && (
+              <div className="mt-3 grid gap-2 md:grid-cols-2">
+                {b.images.map((n, i) => (
+                  <div key={n} className="relative aspect-[16/9] overflow-hidden border border-line">
+                    <Image src={`/previews/${n}`} alt={`${project.name} result ${i + 1}`} fill sizes="(min-width: 768px) 360px, 100vw" className="object-cover object-top" />
+                  </div>
+                ))}
+              </div>
             )}
             {b.list && (
               <ul className="border-t border-line">
