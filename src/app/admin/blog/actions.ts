@@ -14,6 +14,7 @@ const text = (f: FormData, k: string) => String(f.get(k) ?? "");
 function refresh() {
   revalidatePath("/", "layout");
   revalidatePath("/blog/rss.xml");
+  revalidatePath("/sitemap.xml");
 }
 
 export async function savePost(_prev: PostFormState, formData: FormData): Promise<PostFormState> {

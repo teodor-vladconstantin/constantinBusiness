@@ -15,7 +15,10 @@ const FIELDS = [
 ] as const;
 
 const text = (f: FormData, k: string) => String(f.get(k) ?? "");
-const refresh = () => revalidatePath("/", "layout");
+const refresh = () => {
+  revalidatePath("/", "layout");
+  revalidatePath("/sitemap.xml");
+};
 
 export async function saveProject(_prev: ProjectFormState, formData: FormData): Promise<ProjectFormState> {
   await requireAdmin();
