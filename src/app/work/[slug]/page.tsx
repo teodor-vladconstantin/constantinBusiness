@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Rule } from "@/components/motion";
-import { Rich } from "@/components/rich";
 import { ProjectLine } from "@/components/spine";
 import { TechChip } from "@/components/tech-chip";
 import { RepoLink } from "@/components/work-card";
@@ -74,7 +73,7 @@ export default async function CasePage({ params }: Props) {
             <div className="grid gap-2">
               {study[b.key].map((t) => (
                 <p key={t} className="prose-site">
-                  <Rich text={t} />
+                  {t}
                 </p>
               ))}
             </div>

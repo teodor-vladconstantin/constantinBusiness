@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SmoothScroll } from "@/components/smooth-scroll";
-import { PaletteLazy } from "@/components/palette-lazy";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { site } from "@/lib/site";
@@ -10,7 +9,7 @@ import "./globals.css";
 
 // next/font reads these options at build time, so they must be literals.
 const poppins = Poppins({ subsets: ["latin", "latin-ext"], weight: "700", variable: "--font-poppins", display: "swap" });
-const inter = Inter({ subsets: ["latin", "latin-ext"], variable: "--font-inter", display: "optional" });
+const inter = Inter({ subsets: ["latin", "latin-ext"], weight: ["400", "700"], variable: "--font-inter", display: "optional" });
 const mono = JetBrains_Mono({ subsets: ["latin", "latin-ext"], weight: "400", variable: "--font-jetbrains", display: "optional" });
 
 export const metadata: Metadata = {
@@ -30,7 +29,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <SmoothScroll />
-        <PaletteLazy />
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />

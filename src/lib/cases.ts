@@ -1,5 +1,4 @@
 // Case study copy for the two featured projects. Facts come from site-facts/ and the owner.
-// "[TODO: ...]" markers render as placeholders and are listed before launch.
 
 export type CaseStudy = {
   slug: "joben" | "nyra";
@@ -20,7 +19,7 @@ export const cases: CaseStudy[] = [
     ],
     missing: [
       "The first thing a person does with Joben is check a resume. That check sat behind an account. A visitor had to sign up before seeing any result.",
-      "The homepage button added to it. It sent visitors to sign-up instead of the checker. [TODO: Duku confirms numbers and period]",
+      "The homepage button added to it. It sent visitors to sign-up instead of the checker.",
     ],
     investigation: [
       "I walked the path a visitor takes from the homepage to the first result. That is where I found the button.",
@@ -61,7 +60,7 @@ export const cases: CaseStudy[] = [
       "Database tests run on Postgres compiled to WASM with every migration applied. CI runs lint, types, database tests, the build and the parser tests.",
     ],
     result: [
-      "A candidate table and kanban with keyword search, notes, CSV export and an inline CV viewer. [TODO: Duku adds numbers if he wants them public]",
+      "A candidate table and kanban with keyword search, notes, CSV export and an inline CV viewer.",
       "The repository is private. I wrote all 16 commits.",
     ],
   },
