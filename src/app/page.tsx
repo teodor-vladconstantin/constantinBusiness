@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { Reveal } from "@/components/motion";
-import { ProjectCard } from "@/components/project-card";
+import { Projects } from "@/components/projects";
 import { Section } from "@/components/section";
 import { Spine, type SpineSection } from "@/components/spine";
-import { projects } from "@/lib/projects";
 import { principles } from "@/lib/principles";
 import { site } from "@/lib/site";
 
@@ -17,15 +16,19 @@ export default function Home() {
   return (
     <>
       <Spine sections={sections} />
-      <section className="container-site pb-24 pt-16 md:pt-32">
-        <p className="label mb-3">{site.role}</p>
-        <h1 className="display max-w-[18ch]">
-          <Reveal eager>{site.name}</Reveal>
-        </h1>
-        <p className="mt-4 max-w-[52ch] text-[19px] leading-snug text-muted">{site.intro}</p>
+      <section className="container-site pb-12 pt-10 md:pt-16">
+        <div className="grid-12 items-end gap-y-3">
+          <h1 className="display col-span-12 md:col-span-8">
+            <Reveal eager>{site.name}</Reveal>
+          </h1>
+          <div className="col-span-12 md:col-span-4">
+            <p className="label mb-1">{site.role}</p>
+            <p className="text-[16px] leading-snug text-muted">{site.intro}</p>
+          </div>
+        </div>
         <div className="mt-4 flex flex-wrap items-center gap-3">
-          <a href="#projects" className="bg-accent px-3 py-[12px] font-mono text-[12px] uppercase tracking-[0.08em] text-black">
-            See the work
+          <a href={`mailto:${site.emails[0]}`} className="bg-accent px-2 py-1 font-mono text-[12px] uppercase tracking-[0.08em] text-black">
+            Get in touch
           </a>
           <a href={site.github} rel="noopener noreferrer" className="label hover:!text-fg">
             GitHub ↗
@@ -37,15 +40,7 @@ export default function Home() {
       </section>
 
       <section id="projects" className="container-site pb-24">
-        <div className="mb-4 flex items-baseline justify-between border-t border-line pt-2">
-          <h2 className="label">Selected work</h2>
-          <span className="label">{String(projects.length).padStart(2, "0")}</span>
-        </div>
-        <div className="grid gap-x-3 gap-y-8 md:grid-cols-2">
-          {projects.map((p, i) => (
-            <ProjectCard key={p.slug} p={p} priority={i < 2} />
-          ))}
-        </div>
+        <Projects />
       </section>
 
       <Section id="principles" n="01" title="How I build">

@@ -94,6 +94,7 @@ export const projects: Project[] = [
       { text: "PDF export and resume parsing run as separate services.", path: "latex-service, resume-parser-service" },
     ],
     scale: ["421 commits", "26 migrations", "82 test files", "2 languages"],
+    repo: { kind: "public", label: "Repository", url: "https://github.com/teodor-vladconstantin/joben-ai-resume" },
     live: "https://joben.eu",
   },
   {
