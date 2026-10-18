@@ -98,8 +98,15 @@ export default async function ProjectPage({ params }: Props) {
       </div>
 
       {project.preview && (
-        <div className="relative mt-6 aspect-[16/9] overflow-hidden border border-line">
-          <Image src={`/previews/${project.preview}`} alt={`${project.name} homepage`} fill priority sizes="(min-width: 1248px) 1200px, 100vw" className="object-cover object-top" />
+        <div className="relative mt-6 aspect-[16/9] overflow-hidden border border-line bg-[#18181b]">
+          <Image
+            src={`/previews/${project.preview}`}
+            alt={`${project.name} homepage`}
+            fill
+            priority
+            sizes="(min-width: 1248px) 1200px, 100vw"
+            className={project.previewSmall ? "object-none object-center" : "object-cover object-top"}
+          />
         </div>
       )}
 
