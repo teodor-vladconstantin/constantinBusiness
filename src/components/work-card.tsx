@@ -6,7 +6,7 @@ import { TechChip } from "./tech-chip";
 // Featured project: preview, name, one line, tools, links. The title link covers the card.
 export function WorkCard({ p, priority = false, as: Heading = "h3" }: { p: Project; priority?: boolean; as?: "h2" | "h3" }) {
   return (
-    <article className="group relative flex flex-col">
+    <article className="group relative flex h-full flex-col">
       <div className="relative aspect-[16/9] overflow-hidden border border-line bg-[#18181b]">
         {p.preview ? (
           <Image
@@ -34,12 +34,12 @@ export function WorkCard({ p, priority = false, as: Heading = "h3" }: { p: Proje
         <span className="label">{p.year}</span>
       </div>
       <p className="mt-1 max-w-[46ch] text-[15px] leading-snug text-muted">{p.oneLiner}</p>
-      <ul className="mt-2 flex flex-wrap gap-[6px]">
+      <ul className="mb-2 mt-2 flex flex-wrap gap-[6px]">
         {p.stack.map((t) => (
           <TechChip key={t} name={t} />
         ))}
       </ul>
-      <div className="relative z-10 mt-2 flex flex-wrap gap-x-3 gap-y-1 border-t border-line pt-2">
+      <div className="relative z-10 mt-auto flex flex-wrap gap-x-3 gap-y-1 border-t border-line pt-2">
         <Link href={`/work/${p.slug}`} className="label !text-fg">
           Case study →
         </Link>

@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { Reveal } from "@/components/motion";
 import { Spine, type SpineSection } from "@/components/spine";
+import { ProjectsRail } from "@/components/projects-rail";
 import { WorkCard } from "@/components/work-card";
-import { getProject } from "@/lib/projects";
+import { getProject, projects } from "@/lib/projects";
 import { site } from "@/lib/site";
 
 const sections: SpineSection[] = [
@@ -12,6 +13,7 @@ const sections: SpineSection[] = [
 
 export default function Home() {
   const featured = ["joben", "nyra"].map((s) => getProject(s)!);
+  const others = projects.filter((p) => !featured.includes(p));
   return (
     <>
       <Spine sections={sections} />
@@ -54,6 +56,16 @@ export default function Home() {
           {featured.map((p, i) => (
             <WorkCard key={p.slug} p={p} priority={i === 0} />
           ))}
+        </div>
+
+        <div className="mt-12">
+          <ProjectsRail label="More projects">
+            {others.map((p) => (
+              <li key={p.slug} className="w-[82vw] shrink-0 snap-start sm:w-[380px] md:w-[420px]">
+                <WorkCard p={p} />
+              </li>
+            ))}
+          </ProjectsRail>
         </div>
       </section>
 
