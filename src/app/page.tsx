@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Reveal } from "@/components/motion";
 import { Spine, type SpineSection } from "@/components/spine";
+import { LazyContactForm } from "@/components/lazy-contact-form";
 import { ProjectsRail } from "@/components/projects-rail";
 import { WorkCard } from "@/components/work-card";
 import { getProject, projects } from "@/lib/projects";
@@ -76,6 +77,9 @@ export default function Home() {
             {site.emails[0]}
           </a>
           <p className="mt-3 max-w-[52ch] text-muted">Send a short description of the problem and the budget range.</p>
+          <div className="mt-6">
+            <LazyContactForm />
+          </div>
         </div>
       </section>
     </>
