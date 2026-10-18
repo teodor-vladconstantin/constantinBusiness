@@ -21,7 +21,8 @@ export type Project = {
   inCode: { text: string; path: string }[];
   scale: string[];
   repo?: RepoLink; // omitted when no repository is shown
-  preview?: string; // file in public/previews. Nyra has none until the owner confirms what is public.
+  preview?: string; // file in public/previews
+  internal?: boolean; // internal tool, no public product page
   case?: boolean; // has a full case study at /work/<slug>
   live?: string;
 };
@@ -52,6 +53,7 @@ export const projects: Project[] = [
     ],
     scale: ["38 commits", "16 migrations", "7 test files", "6 roles, 3 departments"],
     repo: { kind: "public", label: "Repository", url: "https://github.com/teodor-vladconstantin/ThinkUp-Intra" },
+    internal: true,
   },
   {
     slug: "nyra",
@@ -74,6 +76,7 @@ export const projects: Project[] = [
     ],
     scale: ["16 commits", "11 migrations", "7 database test files", "PDF and DOCX up to 10 MB"],
     repo: priv,
+    preview: "nyra.png",
     case: true,
   },
   {
@@ -174,6 +177,7 @@ export const projects: Project[] = [
     ],
     scale: ["74 commits", "19 routes", "4 migrations"],
     repo: { kind: "public", label: "Repository", url: "https://github.com/TeodorCtin/divein-buzau-final" },
+    preview: "divein.png",
   },
   {
     slug: "airlife",

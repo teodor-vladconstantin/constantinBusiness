@@ -41,7 +41,6 @@ export const cases: CaseStudy[] = [
   },
   {
     slug: "nyra",
-    note: "Draft. This is a generic description until Duku confirms what can be public.",
     problem: [
       "A small business tracked job candidates in spreadsheets and email. CVs arrived as files. Someone opened each one and copied the details by hand.",
       "I built an applicant tracking tool for them. It reads uploaded CVs and shows candidates in a table and a kanban board.",
@@ -62,7 +61,7 @@ export const cases: CaseStudy[] = [
       "Database tests run on Postgres compiled to WASM with every migration applied. CI runs lint, types, database tests, the build and the parser tests.",
     ],
     result: [
-      "A candidate table and kanban with keyword search, notes, CSV export and an inline CV viewer. [TODO: Duku confirms which numbers and details can be public]",
+      "A candidate table and kanban with keyword search, notes, CSV export and an inline CV viewer. [TODO: Duku adds numbers if he wants them public]",
       "The repository is private. I wrote all 16 commits.",
     ],
   },
