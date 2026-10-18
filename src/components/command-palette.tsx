@@ -4,13 +4,16 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { nav, site } from "@/lib/site";
 import { projects } from "@/lib/projects";
+import { cases } from "@/lib/cases";
 
 type Item = { label: string; hint: string; run: (router: ReturnType<typeof useRouter>) => void };
 
 const items: Item[] = [
   { label: "Home", hint: "Page", run: (r) => r.push("/") },
   ...nav.map((n): Item => ({ label: n.label, hint: "Page", run: (r) => r.push(n.href) })),
-  ...projects.map((p): Item => ({ label: p.name, hint: "Project", run: (r) => r.push(`/projects/${p.slug}`) })),
+  ...projects
+    .filter((p) => cases.some((c) => c.slug === p.slug))
+    .map((p): Item => ({ label: p.name, hint: "Case study", run: (r) => r.push(`/work/${p.slug}`) })),
   { label: "LinkedIn", hint: "External", run: () => window.open(site.linkedin, "_blank", "noopener,noreferrer") },
   { label: "GitHub", hint: "External", run: () => window.open(site.github, "_blank", "noopener,noreferrer") },
 ];

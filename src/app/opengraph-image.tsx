@@ -7,5 +7,5 @@ export const alt = site.name;
 
 // Applies to every route that has no OG image of its own.
 export default function Image() {
-  return renderOg({ label: "Developer from Romania", title: site.name });
+  return renderOg({ label: "Independent forward deployed engineer", title: site.name });
 }

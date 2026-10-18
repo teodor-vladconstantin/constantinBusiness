@@ -16,7 +16,7 @@ const mono = JetBrains_Mono({ subsets: ["latin", "latin-ext"], weight: "400", va
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: site.name, template: `%s | ${site.name}` },
-  description: "Developer from Romania. I turn a client's business need into a solution that fits the budget.",
+  description: "Independent forward deployed engineer. I understand the problem, turn the business need into working software and ship it at the client's budget.",
   openGraph: { siteName: site.name, type: "website" },
   twitter: { card: "summary_large_image" },
   alternates: { types: { "application/rss+xml": "/blog/rss.xml" } },

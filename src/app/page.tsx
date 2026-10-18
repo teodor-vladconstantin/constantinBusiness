@@ -1,35 +1,43 @@
 import Link from "next/link";
 import { Reveal } from "@/components/motion";
-import { Projects } from "@/components/projects";
-import { Section } from "@/components/section";
 import { Spine, type SpineSection } from "@/components/spine";
-import { principles } from "@/lib/principles";
+import { WorkCard } from "@/components/work-card";
+import { getProject } from "@/lib/projects";
 import { site } from "@/lib/site";
 
 const sections: SpineSection[] = [
-  { id: "projects", label: "Projects" },
-  { id: "principles", label: "How I build" },
+  { id: "process", label: "Process" },
+  { id: "work", label: "Work" },
   { id: "contact", label: "Contact" },
 ];
 
+const steps = [
+  { title: "Understand", text: "I start from the problem the business has." },
+  { title: "Scope", text: "I cut the first version small enough to ship and learn from." },
+  { title: "Ship", text: "I deploy it and fix what real use shows." },
+];
+
 export default function Home() {
+  const featured = ["joben", "nyra"].map((s) => getProject(s)!);
   return (
     <>
       <Spine sections={sections} />
-      <section className="container-site pb-12 pt-10 md:pt-16">
-        <div className="grid-12 items-end gap-y-3">
-          <h1 className="display col-span-12 md:col-span-8">
-            <Reveal eager>{site.name}</Reveal>
-          </h1>
-          <div className="col-span-12 md:col-span-4">
-            <p className="label mb-1">{site.role}</p>
-            <p className="text-[16px] leading-snug text-muted">{site.intro}</p>
-          </div>
-        </div>
+      <section className="container-site pb-16 pt-10 md:pt-16">
+        <p className="label mb-3">
+          {site.name} / {site.role}
+        </p>
+        <h1 className="display">
+          <Reveal eager>
+            Judgment of humans.
+            <br />
+            Speed of AI.
+          </Reveal>
+        </h1>
+        <p className="mt-4 max-w-[56ch] text-[18px] leading-snug text-muted">{site.intro}</p>
         <div className="mt-4 flex flex-wrap items-center gap-3">
-          <a href={`mailto:${site.emails[0]}`} className="bg-accent px-2 py-1 font-mono text-[12px] uppercase tracking-[0.08em] text-black">
+          <Link href="/contact" className="bg-accent px-2 py-1 font-mono text-[12px] uppercase tracking-[0.08em] text-black">
             Get in touch
-          </a>
+          </Link>
           <a href={site.github} rel="noopener noreferrer" className="label hover:!text-fg">
             GitHub ↗
           </a>
@@ -39,42 +47,44 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="projects" className="container-site pb-24">
-        <Projects />
-      </section>
-
-      <Section id="principles" n="01" title="How I build">
-        <ol className="border-t border-line">
-          {principles.map((p) => (
-            <li key={p.n} className="border-b border-line">
-              <Link href="/principles" className="row-invert grid grid-cols-12 gap-x-3 px-1 py-2">
-                <span className="label col-span-2">{p.n}</span>
-                <span className="col-span-10">{p.title}</span>
-              </Link>
+      <section id="process" className="container-site pb-24">
+        <ol className="relative grid gap-4 md:grid-cols-3 md:gap-3" aria-label="How I work">
+          <span aria-hidden className="absolute left-0 right-0 top-[3px] hidden h-px bg-line md:block" />
+          {steps.map((s, i) => (
+            <li key={s.title} className="relative border-t border-line pt-3 md:border-t-0">
+              <span aria-hidden className={`absolute left-0 top-[-3px] block h-[7px] w-[7px] rounded-full md:top-0 ${i === steps.length - 1 ? "bg-accent" : "bg-fg"}`} />
+              <p className="label !text-fg md:pt-3">
+                {String(i + 1).padStart(2, "0")} {s.title}
+              </p>
+              <p className="mt-1 max-w-[30ch] text-[15px] leading-snug text-muted">{s.text}</p>
             </li>
           ))}
         </ol>
-      </Section>
+      </section>
 
-      <Section id="contact" n="02" title="Contact">
-        <ul className="grid gap-2">
-          <li>
-            <a className="!text-accent underline underline-offset-4" href={`mailto:${site.emails[0]}`}>
-              {site.emails[0]}
-            </a>
-          </li>
-          <li>
-            <a className="underline underline-offset-4" href={site.linkedin} rel="noopener noreferrer">
-              LinkedIn
-            </a>
-          </li>
-          <li>
-            <a className="underline underline-offset-4" href={site.github} rel="noopener noreferrer">
-              GitHub
-            </a>
-          </li>
-        </ul>
-      </Section>
+      <section id="work" className="container-site pb-24">
+        <div className="mb-4 flex items-baseline justify-between border-t border-line pt-2">
+          <h2 className="label">Selected work</h2>
+          <Link href="/work" className="label hover:!text-fg">
+            All work →
+          </Link>
+        </div>
+        <div className="grid gap-x-3 gap-y-8 md:grid-cols-2">
+          {featured.map((p, i) => (
+            <WorkCard key={p.slug} p={p} priority={i === 0} />
+          ))}
+        </div>
+      </section>
+
+      <section id="contact" className="container-site pb-24">
+        <div className="border-t border-line pt-2">
+          <p className="label mb-2">Contact</p>
+          <a className="font-heading text-[clamp(1.75rem,4vw,3rem)] font-bold leading-none tracking-[-0.03em] underline decoration-accent underline-offset-8" href={`mailto:${site.emails[0]}`}>
+            {site.emails[0]}
+          </a>
+          <p className="mt-3 max-w-[52ch] text-muted">Send a short description of the problem and the budget range.</p>
+        </div>
+      </section>
     </>
   );
 }
