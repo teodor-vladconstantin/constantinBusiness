@@ -15,7 +15,8 @@ export default function Home() {
   return (
     <>
       <Spine sections={sections} />
-      <section className="container-site pb-8 pt-10 md:pb-10 md:pt-16">
+      <section className="container-site flex min-h-[calc(100svh-59px)] flex-col py-8">
+        <div className="my-auto">
         <p className="label mb-3">
           {site.name} / {site.role}
         </p>
@@ -36,9 +37,13 @@ export default function Home() {
             LinkedIn ↗
           </a>
         </div>
+        </div>
+        <a href="#work" className="label self-start hover:!text-fg">
+          Scroll ↓
+        </a>
       </section>
 
-      <section id="work" className="container-site pb-16 md:pb-24">
+      <section id="work" className="container-site py-16 md:py-24">
         <div className="mb-4 flex items-baseline justify-between border-t border-line pt-2">
           <h2 className="label">Work I've shipped</h2>
           <Link href="/work" className="label hover:!text-fg">
@@ -52,7 +57,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="container-site pb-16 md:pb-24">
+      <section id="contact" className="container-site py-16 md:py-24">
         <div className="border-t border-line pt-2">
           <p className="label mb-2">Contact</p>
           <a className="font-heading text-[clamp(1.25rem,5.2vw,3rem)] font-bold leading-none tracking-[-0.03em] [overflow-wrap:anywhere] underline decoration-accent underline-offset-8" href={`mailto:${site.emails[0]}`}>
