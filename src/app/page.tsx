@@ -53,8 +53,8 @@ export default function Home() {
           </Link>
         </div>
         <div className="grid gap-x-3 gap-y-8 md:grid-cols-2">
-          {featured.map((p, i) => (
-            <WorkCard key={p.slug} p={p} priority={i === 0} />
+          {featured.map((p) => (
+            <WorkCard key={p.slug} p={p} />
           ))}
         </div>
 

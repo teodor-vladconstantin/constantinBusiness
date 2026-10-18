@@ -21,7 +21,7 @@ export function WorkCard({ p, priority = false, as: Heading = "h3" }: { p: Proje
         ) : (
           <div className="flex h-full flex-col justify-between p-3">
             <span className="label">{p.internal ? "Internal tool" : p.repo?.kind === "private" ? "Private repository" : "No public preview"}</span>
-            <span className="font-heading text-[clamp(2rem,5vw,3.5rem)] font-bold leading-none tracking-[-0.03em] text-line">{p.name}</span>
+            <span className="font-heading text-[clamp(2rem,5vw,3.5rem)] font-bold leading-none tracking-[-0.03em] text-[#6b6b73]">{p.name}</span>
           </div>
         )}
       </div>
