@@ -9,7 +9,7 @@ export const revalidate = 300;
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const projects = await getProjects();
   const posts = await getPosts();
-  const pages = ["", "/work", "/philosophy", "/contact", "/blog"];
+  const pages = ["", "/work", "/philosophy", "/contact", "/blog", "/privacy", "/terms"];
   return [
     ...pages.map((p) => ({ url: `${site.url}${p}` })),
     ...projects.map((p) => ({ url: `${site.url}/work/${p.slug}` })),
